@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DungeonsCreacion1"></activity>
+        <activity android:name=".LanzadorDados"></activity>
+        <activity android:name=".DungeonsCreacion1" />
         <activity android:name=".DungeonsCreacion2" />
         <activity android:name=".Informacion" />
         <activity android:name=".Hub" />

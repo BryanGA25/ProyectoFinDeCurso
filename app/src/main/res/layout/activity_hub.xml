@@ -8,21 +8,21 @@
 
     <Button
         android:id="@+id/creacion"
-        android:layout_width="195dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="112dp"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="108dp"
         android:layout_marginRight="108dp"
         android:onClick="creacion"
         android:text="Crear Personaje"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/dados" />
 
     <Button
         android:id="@+id/ver"
-        android:layout_width="192dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="92dp"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="108dp"
         android:layout_marginRight="108dp"
         android:text="Ver Personajes"
@@ -33,11 +33,23 @@
         android:id="@+id/info"
         android:layout_width="196dp"
         android:layout_height="50dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginRight="104dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
         android:onClick="informacion"
         android:text="Informacion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ver" />
+
+    <Button
+        android:id="@+id/dados"
+        android:layout_width="196dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
+        android:onClick="lanzar"
+        android:text="Dados"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

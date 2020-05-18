@@ -28,7 +28,10 @@ public class Hub extends AppCompatActivity {
                 Intent informacion= new Intent(this, Informacion.class);
                 informacion.putExtra("seleccion",seleccion);
                 startActivity(informacion);
+    }
 
-
+    public void lanzar(View view){
+        Intent lanzar=new Intent(this,LanzadorDados.class);
+        startActivity(lanzar);
     }
 }
