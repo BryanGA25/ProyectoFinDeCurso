@@ -7,7 +7,7 @@
     tools:context=".DungeonsCreacion2">
 
     <EditText
-        android:id="@+id/Fue"
+        android:id="@+id/fue"
         android:layout_width="147dp"
         android:layout_height="42dp"
         android:layout_marginTop="16dp"
@@ -98,7 +98,7 @@
         android:layout_marginRight="248dp"
         android:text="Destreza"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Fue" />
+        app:layout_constraintTop_toBottomOf="@+id/fue" />
 
     <TextView
         android:id="@+id/consT"
@@ -151,7 +151,8 @@
         android:layout_marginTop="548dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
-        android:text="Siguiente"
+        android:onClick="guardar"
+        android:text="Guardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
