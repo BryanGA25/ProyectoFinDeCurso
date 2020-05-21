@@ -5,11 +5,12 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Las Fichas del Maestro"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LanzadorDados"></activity>
+        <activity android:name=".SeleccionadorFichaDAD"></activity>
+        <activity android:name=".LanzadorDados" />
         <activity android:name=".DungeonsCreacion1" />
         <activity android:name=".DungeonsCreacion2" />
         <activity android:name=".Informacion" />

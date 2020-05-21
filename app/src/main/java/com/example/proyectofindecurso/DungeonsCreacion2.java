@@ -2,6 +2,7 @@ package com.example.proyectofindecurso;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -45,5 +46,8 @@ public class DungeonsCreacion2 extends AppCompatActivity {
                 ,Integer.parseInt(destreza.getText().toString()),Integer.parseInt(constitucion.getText().toString())
                 ,Integer.parseInt(inteligencia.getText().toString()),Integer.parseInt(sabiduria.getText().toString())
                 , Integer.parseInt(carisma.getText().toString()  ));
+
+        Intent menu=new Intent(this,Seleccion.class);
+        startActivity(menu);
     }
 }

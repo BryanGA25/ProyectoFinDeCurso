@@ -26,19 +26,14 @@ public class Hub extends AppCompatActivity {
 
     public void creacion(View view){
         Intent creacion= new Intent(this, DungeonsCreacion1.class);
+        creacion.putExtra("modificacion",false);
         startActivity(creacion);
     }
 
     public void verPersonajes(View view){
-        database=db.getReadableDatabase();
-        Cursor c=database.rawQuery("select _id ,nivel, nombre from DungeonsAndDragons", null);
 
-        if (c != null && c.getCount()>0) {
-            c.moveToFirst();
-            do {
-                System.out.println(c.getInt(c.getColumnIndex("_id"))+"  "+c.getString(c.getColumnIndex("nombre")));
-            } while (c.moveToNext());
-        }
+        Intent verPersonajes= new Intent(this, SeleccionadorFichaDAD.class);
+        startActivity(verPersonajes);
 
     }
 

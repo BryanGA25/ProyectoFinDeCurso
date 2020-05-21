@@ -11,20 +11,41 @@
         android:id="@+id/confirmar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="157dp"
+        android:layout_marginLeft="157dp"
         android:layout_marginTop="188dp"
         android:layout_marginEnd="166dp"
         android:layout_marginRight="166dp"
+        android:layout_marginBottom="124dp"
         android:onClick="continuar"
         android:text="Acceder"
+        app:layout_constraintBottom_toTopOf="@+id/fichas"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/fichas"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="357dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_marginTop="124dp"
+        android:layout_marginBottom="347dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmar"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmar" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="332dp"
+        android:layout_height="34dp"
+        android:layout_marginTop="113dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginRight="39dp"
+        android:text="Seleccione el juego del que desea crear un personaje"
+        android:textColor="#00F5EFEF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

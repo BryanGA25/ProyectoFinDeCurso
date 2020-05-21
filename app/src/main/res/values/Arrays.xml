@@ -19,8 +19,6 @@
         <item>Tiflin</item>
     </string-array>
 
-
-
     <string-array name="transfondo">
         <item>Acólito</item>
         <item>Artesano Gremial</item>
@@ -58,6 +56,5 @@
         <item>D20</item>
         <item>D100</item>
     </string-array>
-
 
 </resources>

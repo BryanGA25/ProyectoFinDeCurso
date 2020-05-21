@@ -22,22 +22,28 @@
         android:id="@+id/tipo"
         android:layout_width="409dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
+        android:layout_marginBottom="56dp"
+        app:layout_constraintBottom_toTopOf="@+id/texto2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/texto" />
 
     <TextView
         android:id="@+id/texto2"
-        android:layout_width="356dp"
-        android:layout_height="29dp"
+        android:layout_width="283dp"
+        android:layout_height="28dp"
         android:layout_marginTop="56dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
+        android:layout_marginBottom="44dp"
         android:text="¿Que cantidad de dados deseas lanzar?"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/cantidad"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tipo" />
 
     <EditText
