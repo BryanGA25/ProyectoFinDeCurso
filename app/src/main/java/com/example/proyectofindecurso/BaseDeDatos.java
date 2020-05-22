@@ -10,13 +10,12 @@ import androidx.annotation.Nullable;
 public class BaseDeDatos extends SQLiteOpenHelper {
 
 
-    private static final String nombreDB="BaseFichas";
+    private static final String nombreDB = "BaseFichas";
     private static final int VERSION_BD = 1;
 
-    private String crearTablaDAD="CREATE TABLE DungeonsAndDragons (_id INTEGER PRIMARY KEY AUTOINCREMENT, nivel INTEGER, " +
+    private String crearTablaDAD = "CREATE TABLE DungeonsAndDragons (_id INTEGER PRIMARY KEY AUTOINCREMENT, nivel INTEGER, " +
             "raza TEXT, clase TEXT, nombre TEXT, alineamiento TEXT, transfondo TEXT, fuerza INTEGER," +
             " destreza INTEGER, constitucion INTEGER, inteligencia TEXT, sabiduria TEXT, carisma TEXT)";
-
 
 
     private SQLiteDatabase bd;
@@ -36,12 +35,12 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+
     }
 
 
-
     public void insertarDAD(Integer nivel, String raza, String clase, String nombre, String alineamiento, String transfondo,
-            Integer fuerza, Integer destreza, Integer constitucion, Integer inteligencia, Integer sabiduria, Integer carisma){
+                            Integer fuerza, Integer destreza, Integer constitucion, Integer inteligencia, Integer sabiduria, Integer carisma) {
 
 
         ContentValues cv = new ContentValues();
@@ -59,11 +58,10 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         cv.put("carisma", carisma);
 
 
-
         bd.insert("DungeonsAndDragons", null, cv);
     }
 
-    public  void verPersonajeDAD(){
+    public void verPersonajeDAD() {
 
     }
 }

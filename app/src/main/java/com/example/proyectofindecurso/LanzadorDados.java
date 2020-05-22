@@ -11,41 +11,40 @@ import android.widget.TextView;
 
 public class LanzadorDados extends AppCompatActivity {
 
-    Spinner dado;
-    int cantidad;
-    TextView resultado;
-    TextView cantidadT;
-
+    private Spinner dado;
+    private int cantidad;
+    private TextView resultado;
+    private TextView cantidadT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lanzador_dados);
-        resultado=(TextView)findViewById(R.id.resultado);
-        cantidadT=(TextView)findViewById(R.id.cantidad);
-        dado=(Spinner)findViewById(R.id.tipo);
+        resultado = (TextView) findViewById(R.id.resultado);
+        cantidadT = (TextView) findViewById(R.id.cantidad);
+        dado = (Spinner) findViewById(R.id.tipo);
 
-        ArrayAdapter<CharSequence> dados=ArrayAdapter.createFromResource(this,R.array.tipo,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> dados = ArrayAdapter.createFromResource(this, R.array.tipo, android.R.layout.simple_spinner_item);
         dado.setAdapter(dados);
     }
 
-    public void lanzar(View view){
+    public void lanzar(View view) {
 
         resultado.setText("");
-        String tipo=dado.getSelectedItem().toString();
-        String numero=tipo.replace("D","");
-        int variable= Integer.parseInt(numero);
-        cantidad=Integer.parseInt(cantidadT.getText().toString());
+        String tipo = dado.getSelectedItem().toString();
+        String numero = tipo.replace("D", "");
+        int variable = Integer.parseInt(numero);
+        cantidad = Integer.parseInt(cantidadT.getText().toString());
 
-        for(int i=0;i<cantidad;i++){
+        for (int i = 0; i < cantidad; i++) {
 
-             int valor=(int)(Math.random()*variable+1);
-             resultado.setText(resultado.getText().toString()+valor);
-             if (i<cantidad){
-                 resultado.append(",");
-             }
+            int valor = (int) (Math.random() * variable + 1);
+            resultado.setText(resultado.getText().toString() + valor);
+            if (i < cantidad) {
+                resultado.append(",");
+            }
         }
-        resultado.setText(resultado.getText().toString().substring(0,resultado.getText().length()-1));
+        resultado.setText(resultado.getText().toString().substring(0, resultado.getText().length() - 1));
 
     }
 
