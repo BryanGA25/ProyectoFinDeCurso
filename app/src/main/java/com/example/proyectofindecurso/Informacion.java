@@ -17,7 +17,7 @@ public class Informacion extends AppCompatActivity {
         switch (seleccion) {
 
             case "Dungeons And Dragons":
-                info.setText("Dungeons and Dragons");
+                info.setText(R.string.informacion_dad);
             default:
                 System.out.println("NADA");
                 break;

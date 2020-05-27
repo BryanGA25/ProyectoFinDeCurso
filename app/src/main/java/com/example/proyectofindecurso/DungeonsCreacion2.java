@@ -7,7 +7,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.proyectofindecurso.tablas.DungeonsTabla;
+
+import java.util.ArrayList;
 
 public class DungeonsCreacion2 extends AppCompatActivity {
 
@@ -21,7 +28,11 @@ public class DungeonsCreacion2 extends AppCompatActivity {
     private BaseDeDatos db;
     private SQLiteDatabase database;
     private Boolean modificacion;
+    private Spinner tiradas;
     private int id;
+    private ArrayList<String> resultados;
+    private ArrayList<Integer> ids;
+    private TextView info;
 
 
     @Override
@@ -29,19 +40,44 @@ public class DungeonsCreacion2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dungeons_creacion2);
         fuerza = (TextView) findViewById(R.id.fue);
-        destreza = (TextView) findViewById(R.id.des);
+        destreza = (TextView) findViewById(R.id.agi);
         carisma = (TextView) findViewById(R.id.caris);
         inteligencia = (TextView) findViewById(R.id.intelect);
-        constitucion = (TextView) findViewById(R.id.cons);
-        sabiduria = (TextView) findViewById(R.id.sab);
+        constitucion = (TextView) findViewById(R.id.ener);
+        sabiduria = (TextView) findViewById(R.id.esp);
         extras = getIntent().getExtras();
         db = new BaseDeDatos(this);
-        database=db.getReadableDatabase();
+        database = db.getReadableDatabase();
         modificacion = extras.getBoolean("modificacion");
+        tiradas = findViewById(R.id.tiradas);
+        resultados = new ArrayList<>();
+        info=(TextView) findViewById(R.id.texto);
+        ids = new ArrayList<>();
+
+
+
 
 
         if (modificacion) {
             modificarPersonaje();
+            tiradas.setVisibility(View.GONE);
+            info.setVisibility(View.GONE);
+        }else {
+            cargarTiradas();
+
+
+            tiradas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                    db.borrarTirada(ids.get(tiradas.getSelectedItemPosition()));
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                }
+
+            });
         }
 
     }
@@ -62,15 +98,38 @@ public class DungeonsCreacion2 extends AppCompatActivity {
     public void guardar(View view) {
 
 
-
-        db.insertarDAD(extras.getInt("nivel"), extras.getString("raza")
-                , extras.getString("clase"), extras.getString("nombre"), extras.getString("alineamiento")
-                , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
-                , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
-                , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
-                , Integer.parseInt(carisma.getText().toString()));
-
+        if (modificacion) {
+            DungeonsTabla dt = new DungeonsTabla(id, extras.getInt("nivel"), extras.getString("raza")
+                    , extras.getString("clase"), extras.getString("nombre"), extras.getString("alineamiento")
+                    , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
+                    , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
+                    , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
+                    , Integer.parseInt(carisma.getText().toString()));
+            db.actualizarPersonajeDAD(dt);
+        } else {
+            db.insertarDAD(extras.getInt("nivel"), extras.getString("raza")
+                    , extras.getString("clase"), extras.getString("nombre"), extras.getString("alineamiento")
+                    , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
+                    , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
+                    , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
+                    , Integer.parseInt(carisma.getText().toString()));
+        }
         Intent menu = new Intent(this, Seleccion.class);
         startActivity(menu);
+    }
+
+    public void cargarTiradas() {
+        Cursor c = database.rawQuery("select _id,resultado from Tiradas", null);
+
+        if (c != null && c.getCount() > 0) {
+            c.moveToFirst();
+            do {
+                resultados.add(Integer.toString(c.getInt(c.getColumnIndex("resultado"))));
+                ids.add(c.getInt(c.getColumnIndex("_id")));
+            } while (c.moveToNext());
+            ArrayAdapter<CharSequence> nombresAdpater =
+                    new ArrayAdapter(this, android.R.layout.simple_spinner_item, resultados);
+            tiradas.setAdapter(nombresAdpater);
+        }
     }
 }

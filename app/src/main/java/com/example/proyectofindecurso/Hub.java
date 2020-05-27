@@ -25,10 +25,25 @@ public class Hub extends AppCompatActivity {
     }
 
     public void creacion(View view) {
-        Intent creacion = new Intent(this, DungeonsCreacion1.class);
-        creacion.putExtra("modificacion", false);
-        startActivity(creacion);
-    }
+        Intent creacion;
+            switch (seleccion) {
+
+                case "Dungeons And Dragons":
+                    creacion= new Intent(this, DungeonsCreacion1.class);
+                    creacion.putExtra("modificacion", false);
+                    startActivity(creacion);
+                    break;
+                case "World of Warcraft":
+                    creacion = new Intent(this, WarcraftCreacion1.class);
+                    creacion.putExtra("modificacion", false);
+                    startActivity(creacion);
+                default:
+                    System.out.println("NADA");
+                    break;
+            }
+        }
+
+
 
     public void verPersonajes(View view) {
 

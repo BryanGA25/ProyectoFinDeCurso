@@ -31,4 +31,7 @@ public class Seleccion extends AppCompatActivity {
         startActivity(actividad2);
 
     }
+
+
+
 }

@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.proyectofindecurso.tablas.DungeonsTabla;
+
 public class BaseDeDatos extends SQLiteOpenHelper {
 
 
@@ -17,7 +19,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
             "raza TEXT, clase TEXT, nombre TEXT, alineamiento TEXT, transfondo TEXT, fuerza INTEGER," +
             " destreza INTEGER, constitucion INTEGER, inteligencia TEXT, sabiduria TEXT, carisma TEXT)";
 
-
+    private String crearTablaTiradas = "CREATE TABLE Tiradas (_id INTEGER PRIMARY KEY AUTOINCREMENT, resultado INTEGER)";
     private SQLiteDatabase bd;
 
 
@@ -30,12 +32,14 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(crearTablaDAD);
+        db.execSQL(crearTablaTiradas);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-
+        db.execSQL("DROP TAble IF EXISTS "+"DungeonsAndDragons");
+        db.execSQL("DROP TAble IF EXISTS "+"Tiradas");
+        onCreate(db);
     }
 
 
@@ -61,7 +65,36 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         bd.insert("DungeonsAndDragons", null, cv);
     }
 
-    public void verPersonajeDAD() {
+    public void actualizarPersonajeDAD(DungeonsTabla dt) {
 
+        ContentValues cv=new ContentValues();
+
+        cv.put("nivel", dt.getNivel());
+        cv.put("raza", dt.getRaza());
+        cv.put("clase", dt.getClase());
+        cv.put("nombre", dt.getNombre());
+        cv.put("alineamiento", dt.getAlineamiento());
+        cv.put("transfondo", dt.getTransfondo());
+        cv.put("fuerza", dt.getFuerza());
+        cv.put("destreza", dt.getDestreza());
+        cv.put("constitucion", dt.getConstitucion());
+        cv.put("inteligencia", dt.getInteligencia());
+        cv.put("sabiduria", dt.getSabiduria());
+        cv.put("carisma", dt.getCarisma());
+
+        bd.update("DungeonsAndDragons",cv,"_id="+dt.getId(),null);
+    }
+
+
+    public void borrarTirada(int id){
+        bd.delete("Tiradas","_id="+id,null);
+    }
+
+
+    public void insertarTirada(int resultado){
+        ContentValues cv = new ContentValues();
+        cv.put("resultado",resultado);
+        System.out.println("HOLAAAAAAAAAAAAAAAAAAAA");
+        bd.insert("Tiradas",null,cv);
     }
 }

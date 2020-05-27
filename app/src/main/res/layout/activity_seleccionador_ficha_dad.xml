@@ -8,23 +8,23 @@
 
     <Spinner
         android:id="@+id/personajes"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="366dp"
+        android:layout_height="30dp"
         android:layout_marginTop="69dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texto" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texto"
+        app:layout_constraintVertical_bias="0.029" />
 
     <TextView
         android:id="@+id/texto"
         android:layout_width="322dp"
         android:layout_height="60dp"
         android:layout_marginTop="72dp"
-        android:layout_marginEnd="70dp"
-        android:layout_marginRight="70dp"
         android:text="Elige el nombre de personaje que quieres ver o borrar sus datos."
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -32,11 +32,11 @@
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_marginTop="108dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginRight="28dp"
         android:onClick="borrar"
         android:text="Eliminar Personaje"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personajes" />
 
     <Button
@@ -44,10 +44,10 @@
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginTop="108dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginRight="68dp"
         android:onClick="visualizar"
         android:text="Modificar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.848"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/personajes" />
 </androidx.constraintlayout.widget.ConstraintLayout>

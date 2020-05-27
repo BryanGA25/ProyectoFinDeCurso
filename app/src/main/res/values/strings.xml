@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ProyectoFinDeCurso</string>
+    <string name="informacion_dad">En esta guia te enseñaremos como crear tu personaje de Dungeons and Dragons.\n
+    Lo primero, que debes de saber, es que puedes utilizar la función de lanzar dados, para guardar  tus tiradas de creación de personaje.
+    \n Para Dungeons and Dragons necesitaras 4 dados de 6 caras(D6) 6 veces y dar le click a guardar tirada en cada una de ellas,
+    para que luego las puedas usar a la hora de crear el personaje.</string>
 </resources>
