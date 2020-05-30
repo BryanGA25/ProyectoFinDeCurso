@@ -18,11 +18,12 @@ public class LanzadorDados extends AppCompatActivity {
     private Spinner dado;
     private int cantidad;
     private TextView resultado;
-    private TextView cantidadT;
+    private Spinner cantidadT;
     private ArrayList<Integer> valores;
     private BaseDeDatos db;
     private SQLiteDatabase database;
     private int total;
+    private ArrayList cantidadDado;
 
 
 
@@ -31,12 +32,19 @@ public class LanzadorDados extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lanzador_dados);
         resultado = (TextView) findViewById(R.id.resultado);
-        cantidadT = (TextView) findViewById(R.id.cantidad);
+        cantidadT = (Spinner) findViewById(R.id.cantidad);
         dado = (Spinner) findViewById(R.id.tipo);
         db = new BaseDeDatos(this);
         database = db.getReadableDatabase();
         ArrayAdapter<CharSequence> dados = ArrayAdapter.createFromResource(this, R.array.tipo, android.R.layout.simple_spinner_item);
         dado.setAdapter(dados);
+        cantidadDado=new ArrayList();
+        for (int i=1;i<=50;i++){
+            cantidadDado.add(i);
+        }
+        ArrayAdapter<CharSequence> cantidades=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,cantidadDado);
+        cantidadT.setAdapter(cantidades);
+
     }
 
     public void lanzar(View view) {
@@ -45,7 +53,8 @@ public class LanzadorDados extends AppCompatActivity {
         String tipo = dado.getSelectedItem().toString();
         String numero = tipo.replace("D", "");
         int variable = Integer.parseInt(numero);
-        cantidad = Integer.parseInt(cantidadT.getText().toString());
+        cantidad = Integer.parseInt(cantidadT.getSelectedItem().toString());
+
 
         for (int i = 0; i < cantidad; i++) {
 

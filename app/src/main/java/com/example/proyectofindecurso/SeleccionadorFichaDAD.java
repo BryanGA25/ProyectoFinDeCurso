@@ -52,8 +52,18 @@ public class SeleccionadorFichaDAD extends AppCompatActivity {
 
 
     public void cargarSpinner() {
-        Cursor c = database.rawQuery("select _id ,nivel, nombre from DungeonsAndDragons", null);
+        Bundle extras = getIntent().getExtras();
+        String seleccion = extras.getString("seleccion");
+        Cursor c=null;
+        switch (seleccion) {
 
+            case "Dungeons And Dragons":
+                c = database.rawQuery("select _id , nombre from DungeonsAndDragons", null);
+                break;
+            case "World of Warcraft":
+                c = database.rawQuery("select _id , nombre from WorldOfWarcraft", null);
+                break;
+        }
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
             do {

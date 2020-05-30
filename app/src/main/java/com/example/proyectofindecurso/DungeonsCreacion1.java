@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class DungeonsCreacion1 extends AppCompatActivity {
 
@@ -56,19 +57,25 @@ public class DungeonsCreacion1 extends AppCompatActivity {
     }
 
     public void siguiente(View view) {
-
-        Intent actividad = new Intent(this, DungeonsCreacion2.class);
-        actividad.putExtra("nombre", nombre.getText().toString());
-        actividad.putExtra("raza", raza.getSelectedItem().toString());
-        actividad.putExtra("transfondo", transfondo.getSelectedItem().toString());
-        actividad.putExtra("alineamiento", alineamiento.getSelectedItem().toString());
-        actividad.putExtra("nivel", Integer.parseInt(nivel.getText().toString()));
-        actividad.putExtra("clase", clase.getText().toString());
-        if (modificacion) {
-            actividad.putExtra("id", id);
-            actividad.putExtra("modificacion", true);
+        if(nombre.getText().toString().equalsIgnoreCase("")
+                ||clase.getText().toString().equalsIgnoreCase("")
+                    ||nivel.getText().toString().equalsIgnoreCase("")){
+            Toast.makeText(this, "Faltan datos por rellenar", Toast.LENGTH_SHORT).show();
+        }else {
+            Intent actividad = new Intent(this, DungeonsCreacion2.class);
+            actividad.putExtra("nombre", nombre.getText().toString());
+            actividad.putExtra("raza", raza.getSelectedItem().toString());
+            actividad.putExtra("transfondo", transfondo.getSelectedItem().toString());
+            actividad.putExtra("alineamiento", alineamiento.getSelectedItem().toString());
+            actividad.putExtra("nivel", Integer.parseInt(nivel.getText().toString()));
+            actividad.putExtra("clase", clase.getText().toString());
+            if (modificacion) {
+                actividad.putExtra("id", id);
+                actividad.putExtra("modificacion", true);
+            }
+            startActivity(actividad);
         }
-        startActivity(actividad);
+
     }
 
     private void cargarPersonaje() {

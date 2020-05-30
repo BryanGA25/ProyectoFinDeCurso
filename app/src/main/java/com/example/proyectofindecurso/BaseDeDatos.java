@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.proyectofindecurso.tablas.DungeonsTabla;
+import com.example.proyectofindecurso.tablas.WarcraftTabla;
 
 public class BaseDeDatos extends SQLiteOpenHelper {
 
@@ -18,6 +19,9 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     private String crearTablaDAD = "CREATE TABLE DungeonsAndDragons (_id INTEGER PRIMARY KEY AUTOINCREMENT, nivel INTEGER, " +
             "raza TEXT, clase TEXT, nombre TEXT, alineamiento TEXT, transfondo TEXT, fuerza INTEGER," +
             " destreza INTEGER, constitucion INTEGER, inteligencia TEXT, sabiduria TEXT, carisma TEXT)";
+    private String crearTablaWarcraft="CREATE TABLE WorldOfWarcraft (_id INTEGER PRIMARY KEY AUTOINCREMENT, nivel INTEGER,"+
+                    "raza TEXT, clase TEXT, nombre TEXT, faccion TEXT, alineamiento TEXT, transfondo TEXT, fuerza INTEGER,"+
+                    "destreza INTEGER, constitucion INTEGER, inteligencia TEXT, espiritu TEXT, carisma TEXT)";
 
     private String crearTablaTiradas = "CREATE TABLE Tiradas (_id INTEGER PRIMARY KEY AUTOINCREMENT, resultado INTEGER)";
     private SQLiteDatabase bd;
@@ -33,33 +37,53 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(crearTablaDAD);
         db.execSQL(crearTablaTiradas);
+        db.execSQL(crearTablaWarcraft);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TAble IF EXISTS "+"DungeonsAndDragons");
         db.execSQL("DROP TAble IF EXISTS "+"Tiradas");
+        db.execSQL("DROP TAble IF EXISTS "+"WorldOfWarcraft");
         onCreate(db);
     }
 
+    public void insertarWarcraft(WarcraftTabla wt){
+        ContentValues cv=new ContentValues();
+        cv.put("nivel", wt.getNivel());
+        cv.put("raza", wt.getRaza());
+        cv.put("clase", wt.getClase());
+        cv.put("nombre", wt.getNombre());
+        cv.put("faccion", wt.getFaccion());
+        cv.put("alineamiento", wt.getAlineamiento());
+        cv.put("transfondo", wt.getTransfondo());
+        cv.put("fuerza", wt.getFuerza());
+        cv.put("agilidad", wt.getAgilidad());
+        cv.put("energia", wt.getEnergia());
+        cv.put("inteligencia", wt.getInteligencia());
+        cv.put("espiritu", wt.getEsperitu());
+        cv.put("carisma", wt.getCarisma());
 
-    public void insertarDAD(Integer nivel, String raza, String clase, String nombre, String alineamiento, String transfondo,
-                            Integer fuerza, Integer destreza, Integer constitucion, Integer inteligencia, Integer sabiduria, Integer carisma) {
+        bd.insert("WorldOfWarcraft", null, cv);
+    }
+
+
+    public void insertarDAD(DungeonsTabla dt) {
 
 
         ContentValues cv = new ContentValues();
-        cv.put("nivel", nivel);
-        cv.put("raza", raza);
-        cv.put("clase", clase);
-        cv.put("nombre", nombre);
-        cv.put("alineamiento", alineamiento);
-        cv.put("transfondo", transfondo);
-        cv.put("fuerza", fuerza);
-        cv.put("destreza", destreza);
-        cv.put("constitucion", constitucion);
-        cv.put("inteligencia", inteligencia);
-        cv.put("sabiduria", sabiduria);
-        cv.put("carisma", carisma);
+        cv.put("nivel", dt.getNivel());
+        cv.put("raza", dt.getRaza());
+        cv.put("clase", dt.getClase());
+        cv.put("nombre", dt.getNombre());
+        cv.put("alineamiento", dt.getAlineamiento());
+        cv.put("transfondo", dt.getTransfondo());
+        cv.put("fuerza", dt.getFuerza());
+        cv.put("destreza", dt.getDestreza());
+        cv.put("constitucion", dt.getConstitucion());
+        cv.put("inteligencia", dt.getInteligencia());
+        cv.put("sabiduria", dt.getSabiduria());
+        cv.put("carisma", dt.getCarisma());
 
 
         bd.insert("DungeonsAndDragons", null, cv);

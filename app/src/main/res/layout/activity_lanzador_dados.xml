@@ -40,18 +40,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tipo" />
 
-    <EditText
+    <Spinner
         android:id="@+id/cantidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="96dp"
-        android:layout_marginRight="96dp"
-        android:ems="10"
-        android:hint="Cantidad"
-        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/texto2" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/texto2"
+        app:layout_constraintVertical_bias="0.072" />
 
     <TextView
         android:id="@+id/resultado"

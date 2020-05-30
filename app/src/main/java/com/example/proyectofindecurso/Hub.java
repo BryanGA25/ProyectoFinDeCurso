@@ -37,6 +37,7 @@ public class Hub extends AppCompatActivity {
                     creacion = new Intent(this, WarcraftCreacion1.class);
                     creacion.putExtra("modificacion", false);
                     startActivity(creacion);
+                    break;
                 default:
                     System.out.println("NADA");
                     break;
@@ -48,6 +49,7 @@ public class Hub extends AppCompatActivity {
     public void verPersonajes(View view) {
 
         Intent verPersonajes = new Intent(this, SeleccionadorFichaDAD.class);
+        verPersonajes.putExtra("seleccion", seleccion);
         startActivity(verPersonajes);
 
     }

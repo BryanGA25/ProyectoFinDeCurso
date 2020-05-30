@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyectofindecurso.tablas.DungeonsTabla;
 
@@ -34,6 +35,12 @@ public class DungeonsCreacion2 extends AppCompatActivity {
     private ArrayList<Integer> ids;
     private TextView info;
 
+    public void onResume(){
+        super.onResume();
+        cargarTiradas();
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,19 +72,6 @@ public class DungeonsCreacion2 extends AppCompatActivity {
         }else {
             cargarTiradas();
 
-
-            tiradas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
-                    db.borrarTirada(ids.get(tiradas.getSelectedItemPosition()));
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parentView) {
-                }
-
-            });
         }
 
     }
@@ -96,7 +90,11 @@ public class DungeonsCreacion2 extends AppCompatActivity {
 
 
     public void guardar(View view) {
-
+    if(fuerza.getText().toString().equalsIgnoreCase("") || destreza.getText().toString().equalsIgnoreCase("")
+            ||constitucion.getText().toString().equalsIgnoreCase("")||inteligencia.getText().toString().equalsIgnoreCase("")
+            ||sabiduria.getText().toString().equalsIgnoreCase("")||carisma.getText().toString().equalsIgnoreCase("")){
+        Toast.makeText(this, "Faltan campos sin rellenar", Toast.LENGTH_SHORT).show();
+    }else {
 
         if (modificacion) {
             DungeonsTabla dt = new DungeonsTabla(id, extras.getInt("nivel"), extras.getString("raza")
@@ -107,15 +105,24 @@ public class DungeonsCreacion2 extends AppCompatActivity {
                     , Integer.parseInt(carisma.getText().toString()));
             db.actualizarPersonajeDAD(dt);
         } else {
-            db.insertarDAD(extras.getInt("nivel"), extras.getString("raza")
-                    , extras.getString("clase"), extras.getString("nombre"), extras.getString("alineamiento")
-                    , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
-                    , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
-                    , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
-                    , Integer.parseInt(carisma.getText().toString()));
+            DungeonsTabla dt = new DungeonsTabla
+                    (0, extras.getInt("nivel"), extras.getString("raza")
+                            , extras.getString("clase"), extras.getString("nombre"), extras.getString("alineamiento")
+                            , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
+                            , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
+                            , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
+                            , Integer.parseInt(carisma.getText().toString()));
+            db.insertarDAD(dt);
         }
         Intent menu = new Intent(this, Seleccion.class);
         startActivity(menu);
+    }
+    }
+
+    public void dados(View view){
+
+        Intent dados=new Intent(this,LanzadorDados.class);
+        startActivity(dados);
     }
 
     public void cargarTiradas() {
@@ -130,6 +137,19 @@ public class DungeonsCreacion2 extends AppCompatActivity {
             ArrayAdapter<CharSequence> nombresAdpater =
                     new ArrayAdapter(this, android.R.layout.simple_spinner_item, resultados);
             tiradas.setAdapter(nombresAdpater);
+
         }
+        tiradas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                db.borrarTirada(ids.get(tiradas.getSelectedItemPosition()));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
+
+        });
     }
 }
