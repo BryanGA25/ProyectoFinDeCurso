@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 import com.example.proyectofindecurso.tablas.DungeonsTabla;
 import com.example.proyectofindecurso.tablas.WarcraftTabla;
 
@@ -18,10 +16,10 @@ public class BaseDeDatos extends SQLiteOpenHelper {
 
     private String crearTablaDAD = "CREATE TABLE DungeonsAndDragons (_id INTEGER PRIMARY KEY AUTOINCREMENT, nivel INTEGER, " +
             "raza TEXT, clase TEXT, nombre TEXT, alineamiento TEXT, transfondo TEXT, fuerza INTEGER," +
-            " destreza INTEGER, constitucion INTEGER, inteligencia TEXT, sabiduria TEXT, carisma TEXT)";
+            " destreza INTEGER, constitucion INTEGER, inteligencia INTEGER, sabiduria INTEGER, carisma INTEGER)";
     private String crearTablaWarcraft="CREATE TABLE WorldOfWarcraft (_id INTEGER PRIMARY KEY AUTOINCREMENT, nivel INTEGER,"+
                     "raza TEXT, clase TEXT, nombre TEXT, faccion TEXT, alineamiento TEXT, transfondo TEXT, fuerza INTEGER,"+
-                    "destreza INTEGER, constitucion INTEGER, inteligencia TEXT, espiritu TEXT, carisma TEXT)";
+                    "destreza INTEGER, constitucion INTEGER, inteligencia INTEGER, espiritu INTEGER, carisma INTEGER)";
 
     private String crearTablaTiradas = "CREATE TABLE Tiradas (_id INTEGER PRIMARY KEY AUTOINCREMENT, resultado INTEGER)";
     private SQLiteDatabase bd;
@@ -58,13 +56,15 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         cv.put("alineamiento", wt.getAlineamiento());
         cv.put("transfondo", wt.getTransfondo());
         cv.put("fuerza", wt.getFuerza());
-        cv.put("agilidad", wt.getAgilidad());
-        cv.put("energia", wt.getEnergia());
+        cv.put("destreza", wt.getDestreza());
+        cv.put("constitucion", wt.getConstitucion());
         cv.put("inteligencia", wt.getInteligencia());
         cv.put("espiritu", wt.getEsperitu());
         cv.put("carisma", wt.getCarisma());
 
         bd.insert("WorldOfWarcraft", null, cv);
+
+
     }
 
 

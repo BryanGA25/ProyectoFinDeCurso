@@ -11,13 +11,13 @@ public class WarcraftTabla {
     private String alineamiento;
     private String transfondo;
     private Integer fuerza;
-    private Integer agilidad;
-    private Integer energia;
+    private Integer destreza;
+    private Integer constitucion;
     private Integer inteligencia;
     private Integer esperitu;
     private Integer carisma;
 
-    public WarcraftTabla(Integer id, Integer nivel, String raza, String clase, String nombre, String faccion, String alineamiento, String transfondo, Integer fuerza, Integer agilidad, Integer energia, Integer inteligencia, Integer esperitu, Integer carisma) {
+    public WarcraftTabla(Integer id, Integer nivel, String raza, String clase, String nombre, String faccion, String alineamiento, String transfondo, Integer fuerza, Integer destreza, Integer constitucion, Integer inteligencia, Integer esperitu, Integer carisma) {
         this.id = id;
         this.nivel = nivel;
         this.raza = raza;
@@ -27,8 +27,8 @@ public class WarcraftTabla {
         this.alineamiento = alineamiento;
         this.transfondo = transfondo;
         this.fuerza = fuerza;
-        this.agilidad = agilidad;
-        this.energia = energia;
+        this.destreza = destreza;
+        this.constitucion = constitucion;
         this.inteligencia = inteligencia;
         this.esperitu = esperitu;
         this.carisma = carisma;
@@ -106,20 +106,20 @@ public class WarcraftTabla {
         this.fuerza = fuerza;
     }
 
-    public Integer getAgilidad() {
-        return agilidad;
+    public Integer getDestreza() {
+        return destreza;
     }
 
-    public void setAgilidad(Integer agilidad) {
-        this.agilidad = agilidad;
+    public void setDestreza(Integer destreza) {
+        this.destreza = destreza;
     }
 
-    public Integer getEnergia() {
-        return energia;
+    public Integer getConstitucion() {
+        return constitucion;
     }
 
-    public void setEnergia(Integer energia) {
-        this.energia = energia;
+    public void setConstitucion(Integer constitucion) {
+        this.constitucion = constitucion;
     }
 
     public Integer getInteligencia() {
