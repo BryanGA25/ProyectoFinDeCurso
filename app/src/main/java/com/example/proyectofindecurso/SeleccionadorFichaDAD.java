@@ -19,6 +19,8 @@ public class SeleccionadorFichaDAD extends AppCompatActivity {
     private SQLiteDatabase database;
     private ArrayList<String> nombres;
     private ArrayList<Integer> ids;
+    private Bundle extras;
+    private String seleccion;
 
 
     @Override
@@ -30,6 +32,8 @@ public class SeleccionadorFichaDAD extends AppCompatActivity {
         database = db.getReadableDatabase();
         personajes = (Spinner) findViewById(R.id.personajes);
         nombres = new ArrayList<>();
+        extras = getIntent().getExtras();
+        seleccion = extras.getString("seleccion");
         ids = new ArrayList<>();
         cargarSpinner();
 
@@ -37,23 +41,46 @@ public class SeleccionadorFichaDAD extends AppCompatActivity {
 
 
     public void visualizar(View view) {
+        Intent ver=null;
+        switch (seleccion) {
 
-        Intent ver = new Intent(this, DungeonsCreacion1.class);
+            case "Dungeons And Dragons":
+                ver= new Intent(this, DungeonsCreacion1.class);
+               break;
+            case "World of Warcraft":
+                ver= new Intent(this, WarcraftCreacion1.class);
+                break;
+            default:
+                System.out.println("NADA");
+                break;
+        }
+
         ver.putExtra("modificacion", true);
         ver.putExtra("id", ids.get(personajes.getSelectedItemPosition()));
         startActivity(ver);
     }
 
     public void borrar(View view) {
+        switch (seleccion) {
 
-        database.delete("DungeonsAndDragons", "_id=" + ids.get(personajes.getSelectedItemPosition()), null);
+            case "Dungeons And Dragons":
+                database.delete("DungeonsAndDragons", "_id=" + ids.get(personajes.getSelectedItemPosition()), null);
+                break;
+            case "World of Warcraft":
+                database.delete("WorldOfWarcraft", "_id=" + ids.get(personajes.getSelectedItemPosition()), null);
+                break;
+            default:
+                System.out.println("NADA");
+                break;
+        }
+
         cargarSpinner();
     }
 
 
     public void cargarSpinner() {
-        Bundle extras = getIntent().getExtras();
-        String seleccion = extras.getString("seleccion");
+
+
         Cursor c=null;
         switch (seleccion) {
 

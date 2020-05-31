@@ -69,6 +69,7 @@ public class DungeonsCreacion2 extends AppCompatActivity {
             modificarPersonaje();
             tiradas.setVisibility(View.GONE);
             info.setVisibility(View.GONE);
+            findViewById(R.id.dados).setVisibility(View.GONE);
         }else {
             cargarTiradas();
 

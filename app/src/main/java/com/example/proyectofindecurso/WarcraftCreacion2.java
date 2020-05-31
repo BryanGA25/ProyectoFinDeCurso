@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.proyectofindecurso.tablas.WarcraftTabla;
 
@@ -61,9 +62,10 @@ public class WarcraftCreacion2 extends AppCompatActivity {
         ids = new ArrayList<>();
 
         if (modificacion) {
-            //modificarPersonaje();
+            modificarPersonaje();
             tiradas.setVisibility(View.GONE);
             info.setVisibility(View.GONE);
+            findViewById(R.id.dados).setVisibility(View.GONE);
         }else {
             cargarTiradas();
 
@@ -72,21 +74,36 @@ public class WarcraftCreacion2 extends AppCompatActivity {
     }
 
 
-    public void guardar(View view){
-        WarcraftTabla wt=new WarcraftTabla(0,extras.getInt("nivel"), extras.getString("raza")
-                , extras.getString("clase"), extras.getString("nombre"),extras.getString("faccion")
-                , extras.getString("alineamiento")
-                , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
-                , Integer.parseInt(energia.getText().toString()), Integer.parseInt(espiritu.getText().toString())
-                , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(agilidad.getText().toString())
-                , Integer.parseInt(carisma.getText().toString()));
+    public void guardar(View view) {
+        if (fuerza.getText().toString().equalsIgnoreCase("") || agilidad.getText().toString().equalsIgnoreCase("")
+                || energia.getText().toString().equalsIgnoreCase("") || inteligencia.getText().toString().equalsIgnoreCase("")
+                || espiritu.getText().toString().equalsIgnoreCase("") || carisma.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Faltan campos sin rellenar", Toast.LENGTH_SHORT).show();
+        } else {
 
-
-        db.insertarWarcraft(wt);
-        Intent menu = new Intent(this, Seleccion.class);
-        startActivity(menu);
+            if(modificacion) {
+                WarcraftTabla wt = new WarcraftTabla(id, extras.getInt("nivel"), extras.getString("raza")
+                        , extras.getString("clase"), extras.getString("nombre"), extras.getString("faccion")
+                        , extras.getString("alineamiento")
+                        , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
+                        , Integer.parseInt(energia.getText().toString()), Integer.parseInt(espiritu.getText().toString())
+                        , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(agilidad.getText().toString())
+                        , Integer.parseInt(carisma.getText().toString()));
+                db.actualizarWarcraft(wt);
+            }else{
+                WarcraftTabla wt = new WarcraftTabla(0, extras.getInt("nivel"), extras.getString("raza")
+                        , extras.getString("clase"), extras.getString("nombre"), extras.getString("faccion")
+                        , extras.getString("alineamiento")
+                        , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
+                        , Integer.parseInt(energia.getText().toString()), Integer.parseInt(espiritu.getText().toString())
+                        , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(agilidad.getText().toString())
+                        , Integer.parseInt(carisma.getText().toString()));
+                db.insertarWarcraft(wt);
+            }
+            Intent menu = new Intent(this, Seleccion.class);
+            startActivity(menu);
+        }
     }
-
     public void dados(View view){
 
         Intent dados=new Intent(this,LanzadorDados.class);
@@ -119,5 +136,17 @@ public class WarcraftCreacion2 extends AppCompatActivity {
             }
 
         });
+    }
+
+    private void modificarPersonaje() {
+        id = extras.getInt("id");
+        Cursor c = database.rawQuery("select * from WorldOfWarcraft where _id=" + id, null);
+        c.moveToFirst();
+        fuerza.setText(Integer.toString(c.getInt(c.getColumnIndex("fuerza"))));
+        agilidad.setText(Integer.toString(c.getInt(c.getColumnIndex("agilidad"))));
+        espiritu.setText(Integer.toString(c.getInt(c.getColumnIndex("espiritu"))));
+        carisma.setText(Integer.toString(c.getInt(c.getColumnIndex("carisma"))));
+        inteligencia.setText(Integer.toString(c.getInt(c.getColumnIndex("inteligencia"))));
+        energia.setText(Integer.toString(c.getInt(c.getColumnIndex("energia"))));
     }
 }

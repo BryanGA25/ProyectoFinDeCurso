@@ -7,6 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 public class Hub extends AppCompatActivity {
 
@@ -19,6 +21,7 @@ public class Hub extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hub);
         db = new BaseDeDatos(this);
+        database = db.getReadableDatabase();
 
         Bundle extras = getIntent().getExtras();
         seleccion = extras.getString("seleccion");
@@ -50,7 +53,23 @@ public class Hub extends AppCompatActivity {
 
         Intent verPersonajes = new Intent(this, SeleccionadorFichaDAD.class);
         verPersonajes.putExtra("seleccion", seleccion);
-        startActivity(verPersonajes);
+
+
+        Cursor c=null;
+        switch (seleccion) {
+
+            case "Dungeons And Dragons":
+                c = database.rawQuery("select * from DungeonsAndDragons", null);
+                break;
+            case "World of Warcraft":
+                c = database.rawQuery("select * from WorldOfWarcraft", null);
+                break;
+        }
+        if (c != null && c.getCount() > 0) {
+            startActivity(verPersonajes);
+        }else {
+            Toast.makeText(this, "No hay personajes creados en "+seleccion, Toast.LENGTH_SHORT).show();
+        }
 
     }
 

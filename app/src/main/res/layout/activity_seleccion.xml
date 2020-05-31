@@ -38,8 +38,9 @@
         android:id="@+id/textView"
         android:layout_width="339dp"
         android:layout_height="63dp"
+
         android:text="Seleccione el juego del que desea crear un personaje"
-        android:textColor="#1E4AE9"
+        android:textColor="#FFFFFF"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/confirmar"
         app:layout_constraintEnd_toEndOf="parent"

@@ -19,7 +19,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
             " destreza INTEGER, constitucion INTEGER, inteligencia INTEGER, sabiduria INTEGER, carisma INTEGER)";
     private String crearTablaWarcraft="CREATE TABLE WorldOfWarcraft (_id INTEGER PRIMARY KEY AUTOINCREMENT, nivel INTEGER,"+
                     "raza TEXT, clase TEXT, nombre TEXT, faccion TEXT, alineamiento TEXT, transfondo TEXT, fuerza INTEGER,"+
-                    "destreza INTEGER, constitucion INTEGER, inteligencia INTEGER, espiritu INTEGER, carisma INTEGER)";
+                    "agilidad INTEGER, energia INTEGER, inteligencia INTEGER, espiritu INTEGER, carisma INTEGER)";
 
     private String crearTablaTiradas = "CREATE TABLE Tiradas (_id INTEGER PRIMARY KEY AUTOINCREMENT, resultado INTEGER)";
     private SQLiteDatabase bd;
@@ -56,8 +56,8 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         cv.put("alineamiento", wt.getAlineamiento());
         cv.put("transfondo", wt.getTransfondo());
         cv.put("fuerza", wt.getFuerza());
-        cv.put("destreza", wt.getDestreza());
-        cv.put("constitucion", wt.getConstitucion());
+        cv.put("agilidad", wt.getAgilidad());
+        cv.put("energia", wt.getEnergia());
         cv.put("inteligencia", wt.getInteligencia());
         cv.put("espiritu", wt.getEsperitu());
         cv.put("carisma", wt.getCarisma());
@@ -65,6 +65,25 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         bd.insert("WorldOfWarcraft", null, cv);
 
 
+    }
+
+    public void actualizarWarcraft(WarcraftTabla wt){
+        ContentValues cv=new ContentValues();
+        cv.put("nivel", wt.getNivel());
+        cv.put("raza", wt.getRaza());
+        cv.put("clase", wt.getClase());
+        cv.put("nombre", wt.getNombre());
+        cv.put("faccion", wt.getFaccion());
+        cv.put("alineamiento", wt.getAlineamiento());
+        cv.put("transfondo", wt.getTransfondo());
+        cv.put("fuerza", wt.getFuerza());
+        cv.put("agilidad", wt.getAgilidad());
+        cv.put("energia", wt.getEnergia());
+        cv.put("inteligencia", wt.getInteligencia());
+        cv.put("espiritu", wt.getEsperitu());
+        cv.put("carisma", wt.getCarisma());
+
+        bd.update("WorldOfWarcraft",cv,"_id="+wt.getId(),null);
     }
 
 
@@ -118,7 +137,6 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     public void insertarTirada(int resultado){
         ContentValues cv = new ContentValues();
         cv.put("resultado",resultado);
-        System.out.println("HOLAAAAAAAAAAAAAAAAAAAA");
         bd.insert("Tiradas",null,cv);
     }
 }
