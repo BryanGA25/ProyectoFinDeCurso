@@ -1,14 +1,13 @@
 package com.example.proyectofindecurso;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Hub extends AppCompatActivity {
 
@@ -29,24 +28,25 @@ public class Hub extends AppCompatActivity {
 
     public void creacion(View view) {
         Intent creacion;
-            switch (seleccion) {
+        switch (seleccion) {
 
-                case "Dungeons And Dragons":
-                    creacion= new Intent(this, DungeonsCreacion1.class);
-                    creacion.putExtra("modificacion", false);
-                    startActivity(creacion);
-                    break;
-                case "World of Warcraft":
-                    creacion = new Intent(this, WarcraftCreacion1.class);
-                    creacion.putExtra("modificacion", false);
-                    startActivity(creacion);
-                    break;
-                default:
-                    System.out.println("NADA");
-                    break;
-            }
+            case "Dungeons And Dragons":
+                creacion = new Intent(this, DungeonsCreacion1.class);
+                creacion.putExtra("modificacion", false);
+                startActivity(creacion);
+                break;
+            case "World of Warcraft":
+                creacion = new Intent(this, WarcraftCreacion1.class);
+                creacion.putExtra("modificacion", false);
+                startActivity(creacion);
+                break;
+            case "Pathfinder":
+                creacion = new Intent(this, PathfinderCreacion1.class);
+                creacion.putExtra("modificacion", false);
+                startActivity(creacion);
+                break;
         }
-
+    }
 
 
     public void verPersonajes(View view) {
@@ -55,7 +55,7 @@ public class Hub extends AppCompatActivity {
         verPersonajes.putExtra("seleccion", seleccion);
 
 
-        Cursor c=null;
+        Cursor c = null;
         switch (seleccion) {
 
             case "Dungeons And Dragons":
@@ -64,11 +64,14 @@ public class Hub extends AppCompatActivity {
             case "World of Warcraft":
                 c = database.rawQuery("select * from WorldOfWarcraft", null);
                 break;
+            case "Pathfinder":
+                c = database.rawQuery("select * from Pathfinder", null);
+                break;
         }
         if (c != null && c.getCount() > 0) {
             startActivity(verPersonajes);
-        }else {
-            Toast.makeText(this, "No hay personajes creados en "+seleccion, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "No hay personajes creados en " + seleccion, Toast.LENGTH_SHORT).show();
         }
 
     }

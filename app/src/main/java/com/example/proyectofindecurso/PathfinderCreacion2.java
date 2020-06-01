@@ -1,5 +1,7 @@
 package com.example.proyectofindecurso;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,20 +13,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.proyectofindecurso.tablas.WarcraftTabla;
+import com.example.proyectofindecurso.tablas.PathfinderTabla;
 
 import java.util.ArrayList;
 
-public class WarcraftCreacion2 extends AppCompatActivity {
+public class PathfinderCreacion2 extends AppCompatActivity {
 
     private TextView fuerza;
-    private TextView agilidad;
+    private TextView destreza;
     private TextView carisma;
     private TextView inteligencia;
-    private TextView energia;
-    private TextView espiritu;
+    private TextView constitucion;
+    private TextView sabiduria;
     private Bundle extras;
     private BaseDeDatos db;
     private SQLiteDatabase database;
@@ -45,13 +45,13 @@ public class WarcraftCreacion2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_warcraft_creacion2);
+        setContentView(R.layout.activity_pathfinder_creacion2);
         fuerza = (TextView) findViewById(R.id.fue);
-        agilidad = (TextView) findViewById(R.id.agi);
+        destreza = (TextView) findViewById(R.id.agi);
         carisma = (TextView) findViewById(R.id.caris);
         inteligencia = (TextView) findViewById(R.id.intelect);
-        energia = (TextView) findViewById(R.id.ener);
-        espiritu = (TextView) findViewById(R.id.esp);
+        constitucion = (TextView) findViewById(R.id.ener);
+        sabiduria = (TextView) findViewById(R.id.esp);
         extras = getIntent().getExtras();
         db = new BaseDeDatos(this);
         database = db.getReadableDatabase();
@@ -60,6 +60,7 @@ public class WarcraftCreacion2 extends AppCompatActivity {
         resultados = new ArrayList<>();
         info = (TextView) findViewById(R.id.texto);
         ids = new ArrayList<>();
+
 
         if (modificacion) {
             modificarPersonaje();
@@ -73,25 +74,40 @@ public class WarcraftCreacion2 extends AppCompatActivity {
 
     }
 
+    private void modificarPersonaje() {
+        id = extras.getInt("id");
+        Cursor c = database.rawQuery("select * from Pathfinder where _id=" + id, null);
+        c.moveToFirst();
+        fuerza.setText(Integer.toString(c.getInt(c.getColumnIndex("fuerza"))));
+        destreza.setText(Integer.toString(c.getInt(c.getColumnIndex("destreza"))));
+        sabiduria.setText(Integer.toString(c.getInt(c.getColumnIndex("sabiduria"))));
+        carisma.setText(Integer.toString(c.getInt(c.getColumnIndex("carisma"))));
+        inteligencia.setText(Integer.toString(c.getInt(c.getColumnIndex("inteligencia"))));
+        constitucion.setText(Integer.toString(c.getInt(c.getColumnIndex("constitucion"))));
+    }
+
 
     public void guardar(View view) {
-        if (fuerza.getText().toString().equalsIgnoreCase("") || agilidad.getText().toString().equalsIgnoreCase("")
-                || energia.getText().toString().equalsIgnoreCase("") || inteligencia.getText().toString().equalsIgnoreCase("")
-                || espiritu.getText().toString().equalsIgnoreCase("") || carisma.getText().toString().equalsIgnoreCase("")) {
+        if (fuerza.getText().toString().equalsIgnoreCase("") || destreza.getText().toString().equalsIgnoreCase("")
+                || constitucion.getText().toString().equalsIgnoreCase("") || inteligencia.getText().toString().equalsIgnoreCase("")
+                || sabiduria.getText().toString().equalsIgnoreCase("") || carisma.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(this, "Faltan campos sin rellenar", Toast.LENGTH_SHORT).show();
         } else {
-            WarcraftTabla wt = new WarcraftTabla(0, extras.getInt("nivel"), extras.getString("raza")
-                    , extras.getString("clase"), extras.getString("nombre"), extras.getString("faccion")
-                    , extras.getString("alineamiento")
-                    , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
-                    , Integer.parseInt(energia.getText().toString()), Integer.parseInt(espiritu.getText().toString())
-                    , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(agilidad.getText().toString())
-                    , Integer.parseInt(carisma.getText().toString()));
+            PathfinderTabla pt = new PathfinderTabla
+                    (0, extras.getInt("nivel"), extras.getString("raza")
+                            , extras.getString("clase"), extras.getString("nombre"), extras.getString("alineamiento")
+                            , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
+                            , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
+                            , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
+                            , Integer.parseInt(carisma.getText().toString()));
             if (modificacion) {
-                wt.setId(id);
-                db.actualizarWarcraft(wt);
+                System.out.println("EEEEEEEEEEEEEEEEEEEEE");
+                pt.setId(id);
+                db.actualizarPersonajePathfinder(pt);
             } else {
-                db.insertarWarcraft(wt);
+
+                System.out.println("HOLAaaaaaaaaaaaaaaaaaaaaaa");
+                db.insertarPathfinder(pt);
             }
             Intent menu = new Intent(this, Seleccion.class);
             startActivity(menu);
@@ -130,17 +146,5 @@ public class WarcraftCreacion2 extends AppCompatActivity {
             }
 
         });
-    }
-
-    private void modificarPersonaje() {
-        id = extras.getInt("id");
-        Cursor c = database.rawQuery("select * from WorldOfWarcraft where _id=" + id, null);
-        c.moveToFirst();
-        fuerza.setText(Integer.toString(c.getInt(c.getColumnIndex("fuerza"))));
-        agilidad.setText(Integer.toString(c.getInt(c.getColumnIndex("agilidad"))));
-        espiritu.setText(Integer.toString(c.getInt(c.getColumnIndex("espiritu"))));
-        carisma.setText(Integer.toString(c.getInt(c.getColumnIndex("carisma"))));
-        inteligencia.setText(Integer.toString(c.getInt(c.getColumnIndex("inteligencia"))));
-        energia.setText(Integer.toString(c.getInt(c.getColumnIndex("energia"))));
     }
 }

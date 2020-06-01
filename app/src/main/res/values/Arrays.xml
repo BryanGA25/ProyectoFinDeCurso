@@ -3,11 +3,11 @@
 
     <string-array name="fichas">
         <item>Dungeons And Dragons</item>
-        <item>Anima</item>
+        <item>Pathfinder</item>
         <item>World of Warcraft</item>
     </string-array>
 
-    <string-array name="raza">
+    <string-array name="razaDAD">
         <item>Enano</item>
         <item>Elfo</item>
         <item>Mediano</item>
@@ -17,6 +17,27 @@
         <item>SemiElfo</item>
         <item>SemiOrco</item>
         <item>Tiflin</item>
+    </string-array>
+
+    <string-array name="razaWarcraft">
+        <item>Enano</item>
+        <item>Elfo de la noche</item>
+        <item>Tauren</item>
+        <item>Humano</item>
+        <item>Troll</item>
+        <item>Gnomo</item>
+        <item>Alto elfo</item>
+        <item>Orco</item>
+        <item>No-muerto</item>
+    </string-array>
+
+    <string-array name="razaPathfinder">
+        <item>Enano</item>
+        <item>Elfo</item>
+        <item>Humano</item>
+        <item>Gnomo</item>
+        <item>SemiElfo</item>
+        <item>SemiOrco</item>
     </string-array>
 
     <string-array name="transfondo">

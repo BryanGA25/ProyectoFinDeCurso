@@ -1,9 +1,9 @@
 package com.example.proyectofindecurso;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Informacion extends AppCompatActivity {
 
@@ -11,7 +11,7 @@ public class Informacion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_informacion);
-        TextView info = (TextView) findViewById(R.id.informacion);
+        TextView info = findViewById(R.id.informacion);
         Bundle extras = getIntent().getExtras();
         String seleccion = extras.getString("seleccion");
         switch (seleccion) {

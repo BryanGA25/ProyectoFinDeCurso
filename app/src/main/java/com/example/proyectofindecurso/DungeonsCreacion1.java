@@ -1,7 +1,5 @@
 package com.example.proyectofindecurso;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,8 +10,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DungeonsCreacion1 extends AppCompatActivity {
+import androidx.appcompat.app.AppCompatActivity;
 
+public class DungeonsCreacion1 extends AppCompatActivity {
     private Spinner raza;
     private Spinner transfondo;
     private Spinner alineamiento;
@@ -40,7 +39,7 @@ public class DungeonsCreacion1 extends AppCompatActivity {
         database = db.getReadableDatabase();
 
 
-        ArrayAdapter<CharSequence> razas = ArrayAdapter.createFromResource(this, R.array.raza, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> razas = ArrayAdapter.createFromResource(this, R.array.razaDAD, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> transfondos = ArrayAdapter.createFromResource(this, R.array.transfondo, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> alineamientos = ArrayAdapter.createFromResource(this, R.array.alineamiento, android.R.layout.simple_spinner_item);
 
@@ -57,11 +56,11 @@ public class DungeonsCreacion1 extends AppCompatActivity {
     }
 
     public void siguiente(View view) {
-        if(nombre.getText().toString().equalsIgnoreCase("")
-                ||clase.getText().toString().equalsIgnoreCase("")
-                    ||nivel.getText().toString().equalsIgnoreCase("")){
+        if (nombre.getText().toString().equalsIgnoreCase("")
+                || clase.getText().toString().equalsIgnoreCase("")
+                || nivel.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(this, "Faltan datos por rellenar", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             Intent actividad = new Intent(this, DungeonsCreacion2.class);
             actividad.putExtra("nombre", nombre.getText().toString());
             actividad.putExtra("raza", raza.getSelectedItem().toString());
@@ -85,25 +84,27 @@ public class DungeonsCreacion1 extends AppCompatActivity {
         nombre.setText(c.getString(c.getColumnIndex("nombre")));
         clase.setText(c.getString(c.getColumnIndex("clase")));
         nivel.setText(Integer.toString(c.getInt(c.getColumnIndex("nivel"))));
-        for(int i=0;i<raza.getBaseline();i++) {
-            String razaC=raza.getItemAtPosition(i).toString();
-            if(razaC.equalsIgnoreCase(c.getString(c.getColumnIndex("raza")))){
+        for (int i = 0; i < raza.getBaseline(); i++) {
+            String razaC = raza.getItemAtPosition(i).toString();
+            if (razaC.equalsIgnoreCase(c.getString(c.getColumnIndex("raza")))) {
                 raza.setSelection(i);
                 break;
             }
-        }for(int i=0;i<alineamiento.getBaseline();i++) {
-            String alineamientoC=alineamiento.getItemAtPosition(i).toString();
-            if(alineamientoC.equalsIgnoreCase(c.getString(c.getColumnIndex("alineamiento")))){
+        }
+        for (int i = 0; i < alineamiento.getBaseline(); i++) {
+            String alineamientoC = alineamiento.getItemAtPosition(i).toString();
+            if (alineamientoC.equalsIgnoreCase(c.getString(c.getColumnIndex("alineamiento")))) {
                 alineamiento.setSelection(i);
                 break;
             }
         }
-        for(int i=0;i<transfondo.getBaseline();i++) {
-            String transfondoC=transfondo.getItemAtPosition(i).toString();
-            if(transfondoC.equalsIgnoreCase(c.getString(c.getColumnIndex("transfondo")))){
+        for (int i = 0; i < transfondo.getBaseline(); i++) {
+            String transfondoC = transfondo.getItemAtPosition(i).toString();
+            if (transfondoC.equalsIgnoreCase(c.getString(c.getColumnIndex("transfondo")))) {
                 transfondo.setSelection(i);
                 break;
             }
         }
     }
+
 }

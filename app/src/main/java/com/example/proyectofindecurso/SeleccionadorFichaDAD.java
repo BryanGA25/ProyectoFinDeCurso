@@ -1,7 +1,5 @@
 package com.example.proyectofindecurso;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -9,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -50,8 +50,8 @@ public class SeleccionadorFichaDAD extends AppCompatActivity {
             case "World of Warcraft":
                 ver= new Intent(this, WarcraftCreacion1.class);
                 break;
-            default:
-                System.out.println("NADA");
+            case "Pathfinder":
+                ver= new Intent(this, PathfinderCreacion1.class);
                 break;
         }
 
@@ -70,7 +70,7 @@ public class SeleccionadorFichaDAD extends AppCompatActivity {
                 database.delete("WorldOfWarcraft", "_id=" + ids.get(personajes.getSelectedItemPosition()), null);
                 break;
             default:
-                System.out.println("NADA");
+                database.delete("Pathfinder", "_id=" + ids.get(personajes.getSelectedItemPosition()), null);
                 break;
         }
 
@@ -89,6 +89,9 @@ public class SeleccionadorFichaDAD extends AppCompatActivity {
                 break;
             case "World of Warcraft":
                 c = database.rawQuery("select _id , nombre from WorldOfWarcraft", null);
+                break;
+            case "Pathfinder":
+                c = database.rawQuery("select _id , nombre from Pathfinder", null);
                 break;
         }
         if (c != null && c.getCount() > 0) {

@@ -1,15 +1,13 @@
 package com.example.proyectofindecurso;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.arch.core.util.Function;
-
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
@@ -26,7 +24,6 @@ public class LanzadorDados extends AppCompatActivity {
     private ArrayList cantidadDado;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,11 +35,11 @@ public class LanzadorDados extends AppCompatActivity {
         database = db.getReadableDatabase();
         ArrayAdapter<CharSequence> dados = ArrayAdapter.createFromResource(this, R.array.tipo, android.R.layout.simple_spinner_item);
         dado.setAdapter(dados);
-        cantidadDado=new ArrayList();
-        for (int i=1;i<=50;i++){
+        cantidadDado = new ArrayList();
+        for (int i = 1; i <= 50; i++) {
             cantidadDado.add(i);
         }
-        ArrayAdapter<CharSequence> cantidades=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,cantidadDado);
+        ArrayAdapter<CharSequence> cantidades = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cantidadDado);
         cantidadT.setAdapter(cantidades);
 
     }
@@ -70,7 +67,7 @@ public class LanzadorDados extends AppCompatActivity {
 
     }
 
-    public void guardar(View view){
+    public void guardar(View view) {
         int menor = valores.get(0);
 
         for (int i = 0; i < valores.size(); i++) {
@@ -80,13 +77,13 @@ public class LanzadorDados extends AppCompatActivity {
         }
         Integer is = menor;
         valores.remove(is);
-        total=0;
+        total = 0;
         for (int i : valores
         ) {
-            total=i+total;
+            total = i + total;
         }
         db.insertarTirada(total);
-        total=0;
+        total = 0;
 
     }
 

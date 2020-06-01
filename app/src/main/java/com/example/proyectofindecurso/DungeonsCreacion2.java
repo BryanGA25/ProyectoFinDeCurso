@@ -1,7 +1,5 @@
 package com.example.proyectofindecurso;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.proyectofindecurso.tablas.DungeonsTabla;
 
@@ -32,10 +32,10 @@ public class DungeonsCreacion2 extends AppCompatActivity {
     private Spinner tiradas;
     private int id;
     private ArrayList<String> resultados;
-    private ArrayList<Integer> ids;
+    private ArrayList<Integer> idDados;
     private TextView info;
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         cargarTiradas();
 
@@ -58,11 +58,8 @@ public class DungeonsCreacion2 extends AppCompatActivity {
         modificacion = extras.getBoolean("modificacion");
         tiradas = findViewById(R.id.tiradas);
         resultados = new ArrayList<>();
-        info=(TextView) findViewById(R.id.texto);
-        ids = new ArrayList<>();
-
-
-
+        info = (TextView) findViewById(R.id.texto);
+        idDados = new ArrayList<>();
 
 
         if (modificacion) {
@@ -70,7 +67,7 @@ public class DungeonsCreacion2 extends AppCompatActivity {
             tiradas.setVisibility(View.GONE);
             info.setVisibility(View.GONE);
             findViewById(R.id.dados).setVisibility(View.GONE);
-        }else {
+        } else {
             cargarTiradas();
 
         }
@@ -91,20 +88,10 @@ public class DungeonsCreacion2 extends AppCompatActivity {
 
 
     public void guardar(View view) {
-    if(fuerza.getText().toString().equalsIgnoreCase("") || destreza.getText().toString().equalsIgnoreCase("")
-            ||constitucion.getText().toString().equalsIgnoreCase("")||inteligencia.getText().toString().equalsIgnoreCase("")
-            ||sabiduria.getText().toString().equalsIgnoreCase("")||carisma.getText().toString().equalsIgnoreCase("")){
-        Toast.makeText(this, "Faltan campos sin rellenar", Toast.LENGTH_SHORT).show();
-    }else {
-
-        if (modificacion) {
-            DungeonsTabla dt = new DungeonsTabla(id, extras.getInt("nivel"), extras.getString("raza")
-                    , extras.getString("clase"), extras.getString("nombre"), extras.getString("alineamiento")
-                    , extras.getString("transfondo"), Integer.parseInt(fuerza.getText().toString())
-                    , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
-                    , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
-                    , Integer.parseInt(carisma.getText().toString()));
-            db.actualizarPersonajeDAD(dt);
+        if (fuerza.getText().toString().equalsIgnoreCase("") || destreza.getText().toString().equalsIgnoreCase("")
+                || constitucion.getText().toString().equalsIgnoreCase("") || inteligencia.getText().toString().equalsIgnoreCase("")
+                || sabiduria.getText().toString().equalsIgnoreCase("") || carisma.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Faltan campos sin rellenar", Toast.LENGTH_SHORT).show();
         } else {
             DungeonsTabla dt = new DungeonsTabla
                     (0, extras.getInt("nivel"), extras.getString("raza")
@@ -113,16 +100,24 @@ public class DungeonsCreacion2 extends AppCompatActivity {
                             , Integer.parseInt(destreza.getText().toString()), Integer.parseInt(constitucion.getText().toString())
                             , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
                             , Integer.parseInt(carisma.getText().toString()));
-            db.insertarDAD(dt);
+            if (modificacion) {
+                dt.setId(id);
+                db.actualizarPersonajeDAD(dt);
+            } else {
+
+                db.insertarDAD(dt);
+            }
+            for (int i = 0; i< idDados.size(); i++){
+                db.borrarTirada(idDados.get(i));
+            }
+            Intent menu = new Intent(this, Seleccion.class);
+            startActivity(menu);
         }
-        Intent menu = new Intent(this, Seleccion.class);
-        startActivity(menu);
-    }
     }
 
-    public void dados(View view){
+    public void dados(View view) {
 
-        Intent dados=new Intent(this,LanzadorDados.class);
+        Intent dados = new Intent(this, LanzadorDados.class);
         startActivity(dados);
     }
 
@@ -133,7 +128,7 @@ public class DungeonsCreacion2 extends AppCompatActivity {
             c.moveToFirst();
             do {
                 resultados.add(Integer.toString(c.getInt(c.getColumnIndex("resultado"))));
-                ids.add(c.getInt(c.getColumnIndex("_id")));
+                idDados.add(c.getInt(c.getColumnIndex("_id")));
             } while (c.moveToNext());
             ArrayAdapter<CharSequence> nombresAdpater =
                     new ArrayAdapter(this, android.R.layout.simple_spinner_item, resultados);
@@ -144,7 +139,7 @@ public class DungeonsCreacion2 extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
-                db.borrarTirada(ids.get(tiradas.getSelectedItemPosition()));
+                db.borrarTirada(idDados.get(tiradas.getSelectedItemPosition()));
             }
 
             @Override
