@@ -20,7 +20,7 @@ public class WarcraftCreacion1 extends AppCompatActivity {
     private Spinner alineamiento;
     private TextView nombre;
     private TextView nivel;
-    private TextView clase;
+    private Spinner clase;
     private TextView faccion;
     private Boolean modificacion;
     private int id;
@@ -39,7 +39,7 @@ public class WarcraftCreacion1 extends AppCompatActivity {
         alineamiento = (Spinner) findViewById(R.id.aliniamiento);
         nivel = (TextView) findViewById(R.id.niv);
         nombre = (TextView) findViewById(R.id.nombre);
-        clase = (TextView) findViewById(R.id.clase);
+        clase = (Spinner) findViewById(R.id.clase);
         faccion = (TextView) findViewById(R.id.faccion);
         db = new BaseDeDatos(this);
         database = db.getReadableDatabase();
@@ -51,10 +51,13 @@ public class WarcraftCreacion1 extends AppCompatActivity {
                 android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> alineamientos = ArrayAdapter.createFromResource(this, R.array.alineamiento,
                 android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> clases = ArrayAdapter.createFromResource(this, R.array.clasesWarcraft,
+                android.R.layout.simple_spinner_item);
 
         raza.setAdapter(razas);
         transfondo.setAdapter(alineamientos);
         alineamiento.setAdapter(transfondos);
+        clase.setAdapter(clases);
         extras = getIntent().getExtras();
         modificacion = extras.getBoolean("modificacion");
 
@@ -66,7 +69,6 @@ public class WarcraftCreacion1 extends AppCompatActivity {
 
     public void siguiente(View view) {
         if (nombre.getText().toString().equalsIgnoreCase("")
-                || clase.getText().toString().equalsIgnoreCase("")
                 || nivel.getText().toString().equalsIgnoreCase("")
                 || faccion.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(this, "Faltan datos por rellenar", Toast.LENGTH_SHORT).show();
@@ -77,7 +79,7 @@ public class WarcraftCreacion1 extends AppCompatActivity {
             actividad.putExtra("transfondo", transfondo.getSelectedItem().toString());
             actividad.putExtra("alineamiento", alineamiento.getSelectedItem().toString());
             actividad.putExtra("nivel", Integer.parseInt(nivel.getText().toString()));
-            actividad.putExtra("clase", clase.getText().toString());
+            actividad.putExtra("clase", clase.getSelectedItem().toString());
             actividad.putExtra("faccion", faccion.getText().toString());
             if (modificacion) {
                 actividad.putExtra("id", id);
@@ -93,13 +95,19 @@ public class WarcraftCreacion1 extends AppCompatActivity {
         Cursor c = database.rawQuery("select * from WorldOfWarcraft where _id=" + id, null);
         c.moveToFirst();
         nombre.setText(c.getString(c.getColumnIndex("nombre")));
-        clase.setText(c.getString(c.getColumnIndex("clase")));
         nivel.setText(Integer.toString(c.getInt(c.getColumnIndex("nivel"))));
         faccion.setText(c.getString((c.getColumnIndex("faccion"))));
         for (int i = 0; i < raza.getBaseline(); i++) {
             String razaC = raza.getItemAtPosition(i).toString();
             if (razaC.equalsIgnoreCase(c.getString(c.getColumnIndex("raza")))) {
                 raza.setSelection(i);
+                break;
+            }
+        }
+        for (int i=0;i<clase.getBaseline();i++){
+            String claseC=clase.getItemAtPosition(i).toString();
+            if(claseC.equalsIgnoreCase(c.getString(c.getColumnIndex("clase")))){
+                clase.setSelection(i);
                 break;
             }
         }

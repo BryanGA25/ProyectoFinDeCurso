@@ -40,6 +40,19 @@
         <item>SemiOrco</item>
     </string-array>
 
+
+    <string-array name="clasesWarcraft">
+    <item>Guerrero</item>
+    <item>Cazador</item>
+    <item>Picaro</item>
+    <item>Druida</item>
+    <item>Sacerdote</item>
+    <item>Brujo</item>
+    <item>Paladin</item>
+    <item>Chaman</item>
+    <item>Mago</item>
+    </string-array>
+
     <string-array name="transfondo">
         <item>Acólito</item>
         <item>Artesano Gremial</item>
