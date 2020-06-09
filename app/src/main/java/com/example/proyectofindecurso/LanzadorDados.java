@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -84,6 +85,8 @@ public class LanzadorDados extends AppCompatActivity {
         }
         db.insertarTirada(total);
         total = 0;
+
+        Toast.makeText(this, "Se ha guardado la tirada", Toast.LENGTH_SHORT).show();
 
     }
 

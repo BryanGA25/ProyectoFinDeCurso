@@ -101,12 +101,9 @@ public class PathfinderCreacion2 extends AppCompatActivity {
                             , Integer.parseInt(inteligencia.getText().toString()), Integer.parseInt(sabiduria.getText().toString())
                             , Integer.parseInt(carisma.getText().toString()));
             if (modificacion) {
-                System.out.println("EEEEEEEEEEEEEEEEEEEEE");
                 pt.setId(id);
                 db.actualizarPersonajePathfinder(pt);
             } else {
-
-                System.out.println("HOLAaaaaaaaaaaaaaaaaaaaaaa");
                 db.insertarPathfinder(pt);
             }
             Intent menu = new Intent(this, Seleccion.class);

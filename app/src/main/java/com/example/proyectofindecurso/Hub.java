@@ -51,7 +51,7 @@ public class Hub extends AppCompatActivity {
 
     public void verPersonajes(View view) {
 
-        Intent verPersonajes = new Intent(this, SeleccionadorFichaDAD.class);
+        Intent verPersonajes = new Intent(this, SeleccionadorFicha.class);
         verPersonajes.putExtra("seleccion", seleccion);
 
 

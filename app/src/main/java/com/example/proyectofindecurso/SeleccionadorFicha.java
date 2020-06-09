@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
-public class SeleccionadorFichaDAD extends AppCompatActivity {
+public class SeleccionadorFicha extends AppCompatActivity {
 
     private Spinner personajes;
     private BaseDeDatos db;

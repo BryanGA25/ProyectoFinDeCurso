@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PathfinderCreacion2"></activity>
-        <activity android:name=".PathfinderCreacion1" />
-        <activity android:name=".WarcraftCreacion2" />
-        <activity android:name=".WarcraftCreacion1" />
-        <activity android:name=".SeleccionadorFichaDAD" />
-        <activity android:name=".LanzadorDados" />
-        <activity android:name=".DungeonsCreacion1" />
-        <activity android:name=".DungeonsCreacion2" />
-        <activity android:name=".Informacion" />
-        <activity android:name=".Hub" />
-        <activity android:name=".Seleccion">
+        <activity android:name=".PathfinderCreacion2" android:screenOrientation="portrait"></activity>
+        <activity android:name=".PathfinderCreacion1" android:screenOrientation="portrait"/>
+        <activity android:name=".WarcraftCreacion2" android:screenOrientation="portrait"/>
+        <activity android:name=".WarcraftCreacion1" android:screenOrientation="portrait"/>
+        <activity android:name=".SeleccionadorFicha" android:screenOrientation="portrait"/>
+        <activity android:name=".LanzadorDados" android:screenOrientation="portrait"/>
+        <activity android:name=".DungeonsCreacion1" android:screenOrientation="portrait"/>
+        <activity android:name=".DungeonsCreacion2" android:screenOrientation="portrait"/>
+        <activity android:name=".Informacion" android:screenOrientation="portrait"/>
+        <activity android:name=".Hub" android:screenOrientation="portrait"/>
+        <activity android:name=".Seleccion" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

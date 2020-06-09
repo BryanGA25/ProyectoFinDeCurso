@@ -97,8 +97,6 @@ public class BaseDeDatos extends SQLiteOpenHelper {
     }
 
 
-
-
     public void insertarDAD(DungeonsTabla dt) {
 
 
@@ -152,12 +150,12 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         bd.insert("Tiradas", null, cv);
     }
 
-    public void insertarPathfinder(PathfinderTabla pt){
+    public void insertarPathfinder(PathfinderTabla pt) {
 
         ContentValues cv = new ContentValues();
         cv.put("nivel", pt.getNivel());
         cv.put("raza", pt.getRaza());
-        cv.put("clase",pt.getClase());
+        cv.put("clase", pt.getClase());
         cv.put("nombre", pt.getNombre());
         cv.put("alineamiento", pt.getAlineamiento());
         cv.put("transfondo", pt.getTransfondo());
@@ -176,7 +174,7 @@ public class BaseDeDatos extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put("nivel", pt.getNivel());
         cv.put("raza", pt.getRaza());
-        cv.put("clase",pt.getClase());
+        cv.put("clase", pt.getClase());
         cv.put("nombre", pt.getNombre());
         cv.put("alineamiento", pt.getAlineamiento());
         cv.put("transfondo", pt.getTransfondo());
